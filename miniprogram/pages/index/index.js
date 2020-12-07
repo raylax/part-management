@@ -1,6 +1,7 @@
 // miniprogram/pages/index.js
 
 import { formatDate } from '../../utils/date'
+import { trimSn } from '../../utils/sn'
 
 Page({
 
@@ -13,6 +14,21 @@ Page({
     formatDate(day) {
       return formatDate(day)
     }
+  },
+
+  async onScan() {
+    wx.scanCode({
+      onlyFromCamera: false,
+      success ({ scanType, result }) {
+        let [path, qs = ''] = result.split('?')
+        if (path !== 'https://s.inurl.org/part.html' || !qs) {
+          return
+        }
+        wx.navigateTo({
+          url: '/pages/add-part/add-part?' + qs,
+        })
+      }
+    })
   },
 
   async onPullDownRefresh() {
@@ -34,7 +50,7 @@ Page({
     await this.fetchData(true)
   },
 
-  async fetchData(force = false) {
+  async fetchData(force = false, search = false) {
     if (!force && !this.data.hasMore) {
       return
     }
@@ -51,9 +67,17 @@ Page({
         data: { 
           offset: this.data.offset,
           limit: this.data.limit,
+          sn: this.data.sn,
          }
       }
     })
+
+
+    if (search && this.data.offset === 0 && result.length == 1) {
+      wx.navigateTo({
+        url: '/pages/add-part/add-part?id=' + result[0]._id,
+      })
+    }
     result = result.map(x => {
       return {
         ...x, 
@@ -69,13 +93,26 @@ Page({
     wx.hideNavigationBarLoading()
   },
 
-  onSeach({ detail }) {
-    console.log(detail, this.data.sn)
+  async onSnChange({ detail }) {
+    this.setData({
+      sn: trimSn(detail)
+    })
+  },
+
+  async onSnSearch({ detail }) {
+    await this.fetchData(true, true)
+  },
+
+  async onSnClear() {
+    this.setData({
+      sn: ''
+    })
+    await this.fetchData(true)
   },
 
   onAddPart() {
     wx.navigateTo({
-      url: '../add-part/add-part',
+      url: '/pages/add-part/add-part',
     })
   },
 

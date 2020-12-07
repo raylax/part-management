@@ -1,15 +1,12 @@
-export const showModal = (content, title = '提示') => {
+import Dialog from '../miniprogram_npm/@vant/weapp/dialog/dialog'
+
+export const showModal = (message, title = '提示') => {
   return new Promise(function (resolve, reject) {
-    wx.showModal({
+    Dialog.confirm({
       title: title,
-      content: content,
-      success (res) {
-        if (res.confirm) {
-          resolve(true)
-          return
-        }
-        resolve(false)
-      }
+      message: message,
     })
+    .then(() => resolve(true))
+    .catch(() => resolve(false));
   })
 }

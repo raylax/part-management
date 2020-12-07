@@ -7,6 +7,13 @@
   z-index: 1000;
 }
 
+.scan-qrcode {
+  position: fixed;
+  right: 60rpx;
+  bottom: 260rpx;
+  z-index: 1000;
+}
+
 .title-sn {
   white-space: nowrap;
   overflow: hidden;

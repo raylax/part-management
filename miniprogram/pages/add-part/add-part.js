@@ -16,15 +16,30 @@ Page({
     showSelectWarehousingDate: false,
     errorMessageSn: '',
     steps: [],
+    showRecordSheet: false,
+    actions: [
+      {
+        name: '维修',
+        type: 3,
+      },
+      {
+        name: '测试',
+        type: 4,
+      },
+    ],
   },
 
   async onLoad({ id = '' }) {
-    wx.showNavigationBarLoading()
     this.setData({
       id,
       readonly: !!id
     })
-    if (!!id) {
+    this.loadData()
+  },
+
+  async loadData() {
+    wx.showNavigationBarLoading()
+    if (this.data.readonly) {
       const { result } = await wx.cloud.callFunction({
         name: 'part',
         data: {
@@ -38,7 +53,7 @@ Page({
           duration: 1000,
           mask: true,
         })
-        setTimeout(() => wx.navigateBack({ delta: 0 }), 1000)
+        setTimeout(() => wx.redirectTo({ url: '/pages/index/index' }), 1000)
       }
       this.setData({
         ...result,
@@ -50,6 +65,7 @@ Page({
           }
         })
       })
+      wx.setNavigationBarTitle({ title: this.data.sn })
       this.setWarehousingDate(new Date(result.warehousingDate))
     } else {
       this.setWarehousingDate(new Date())
@@ -75,6 +91,22 @@ Page({
       return false
     }
     return true
+  },
+
+  async onRecord() {
+    this.setData({
+      showRecordSheet: true,
+    })
+  },
+
+  async onCloseRecrdSheet() {
+    this.setData({
+      showRecordSheet: false,
+    })
+  },
+
+  async onSelectRecrdSheet({ detail }) {
+    console.log(detail)
   },
 
   async onSetpTap({ detail }) {
@@ -136,7 +168,7 @@ Page({
       duration: 1000,
       mask: true
     })    
-    setTimeout(() => wx.navigateBack({ delta: 0 }), 1000)
+    setTimeout(() => wx.redirectTo({ url: '/pages/index/index' }), 1000)
   },
 
   async onSnChange({ detail }) {

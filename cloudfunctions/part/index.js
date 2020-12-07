@@ -52,7 +52,7 @@ async function warehouseOut({ id }, context) {
       warehouseOutAt: new Date(),
       logs: _.push([
         {
-          title: '出库',
+          title: '入库',
           type: 2,
           createAt: new Date(),
         }
@@ -79,9 +79,17 @@ async function warehouseIn({ data }, context) {
   })
 }
 
-async function list({ data: { offset, limit } }, context) {
+async function list({ data: { offset, limit, sn } }, context) {
+  const where = {}
+  if (sn) {
+    where['sn'] = db.RegExp({
+      regexp: sn,
+      options: 'i',
+    })
+  }
   const { data = [] } = await db
     .collection('parts')
+    .where(where)
     .orderBy('createAt', 'desc')
     .skip(offset || 0)
     .limit(limit || DB_LIMIT)

@@ -5,6 +5,8 @@
     "van-calendar": "@vant/weapp/calendar/index",
     "van-button": "@vant/weapp/button/index",
     "van-skeleton": "@vant/weapp/skeleton/index",
-    "van-steps": "@vant/weapp/steps/index"
+    "van-steps": "@vant/weapp/steps/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-dialog": "@vant/weapp/dialog/index"
   }
 }

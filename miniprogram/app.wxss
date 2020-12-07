@@ -8,5 +8,6 @@ page {
 
 .button-group .van-button {
   width: 94%;
-  margin-top: 15px;
+  margin-top: 20rpx;
+  
 }

@@ -39,19 +39,19 @@
   />
   </van-cell-group>
 
-  <div class="button-group" wx:if="{{ !readonly }}">
-    <van-button type="primary" block bindtap="onWarehouseIn">入库</van-button>
-  </div>
-
-  <div class="button-group" wx:if="{{ readonly && status === 'WAREHOUSE_IN' }}">
-    <van-button plain type="warning" block bindtap="onWarehouseOut">出库</van-button>
+  <div class="button-group">
+    <van-button wx:if="{{ readonly }}" icon="records" plain block type="primary" bindtap="onRecord">记录</van-button>
+    <van-button wx:if="{{ !readonly }}" icon="completed"  type="primary" block bindtap="onWarehouseIn">入库</van-button>
+    <van-button wx:if="{{ readonly && status === 'WAREHOUSE_IN' }}" icon="completed"  plain type="warning" block bindtap="onWarehouseOut">出库</van-button>
   </div>
 
 
 </van-skeleton>
 
-<text class="group_title">操作日志</text>
+<text wx:if="{{ readonly }}" class="group_title">操作日志</text>
+
 <van-steps
+  wx:if="{{ readonly }}"
   steps="{{ steps }}"
   active="{{ steps.length - 1 }}"
   direction="vertical"
@@ -63,3 +63,16 @@
   bind:close="onSelectWarehousingDateClose" 
   bind:confirm="onSelectWarehousingDateConfirm"
 />
+
+<van-action-sheet
+  description="选择记录类型"
+  show="{{ showRecordSheet }}"
+  actions="{{ actions }}"
+  cancel-text="取消"
+  close-on-click-overlay
+  bind:close="onCloseRecrdSheet"
+  bind:cancel="onCloseRecrdSheet"
+  bind:select="onSelectRecrdSheet"
+/>
+
+<van-dialog id="van-dialog" />
