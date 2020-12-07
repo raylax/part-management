@@ -1,0 +1,17 @@
+/* miniprogram/pages/index.wxss */
+
+.add-part {
+  position: fixed;
+  right: 60rpx;
+  bottom: 120rpx;
+  z-index: 1000;
+}
+
+.title-sn {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 40rpx;
+  font-family: monospace, "Courier New", Courier;
+  padding-right: 10rpx;
+}

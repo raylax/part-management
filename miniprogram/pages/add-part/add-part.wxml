@@ -1,0 +1,65 @@
+<!--miniprogram/pages/add-part/add-part.wxml-->
+<text class="group_title">基本信息</text>
+<van-skeleton row="8" loading="{{ loading }}">
+  <van-cell-group>
+    <van-field
+      label="SN"
+      value="{{ sn }}"
+      placeholder="SN"
+      bind:change="onSnChange"
+      readonly="{{ readonly }}"
+      error-message="{{ errorMessageSn }}"
+    />
+    <van-field
+      label="入库日期"
+      value="{{ warehousingDateText }}"
+      placeholder="入库日期"
+      readonly="true"
+      bindtap="onSelectWarehousingDate"
+    />
+    <van-field
+      wx:if="{{ status === 'WAREHOUSE_OUT' }}"
+      label="出库日期"
+      value="{{ warehouseOutAtText }}"
+      readonly="true"
+    />
+  </van-cell-group>
+
+
+  <van-cell-group>
+    <van-field
+    value="{{ remark }}"
+    label="备注"
+    type="textarea"
+    placeholder=""
+    autosize
+    border="{{ false }}"
+    readonly="{{ readonly }}"
+    bind:change="onRemarkChange"
+  />
+  </van-cell-group>
+
+  <div class="button-group" wx:if="{{ !readonly }}">
+    <van-button type="primary" block bindtap="onWarehouseIn">入库</van-button>
+  </div>
+
+  <div class="button-group" wx:if="{{ readonly && status === 'WAREHOUSE_IN' }}">
+    <van-button plain type="warning" block bindtap="onWarehouseOut">出库</van-button>
+  </div>
+
+
+</van-skeleton>
+
+<text class="group_title">操作日志</text>
+<van-steps
+  steps="{{ steps }}"
+  active="{{ steps.length - 1 }}"
+  direction="vertical"
+  bind:click-step="onSetpTap"
+/>
+
+
+<van-calendar show="{{ showSelectWarehousingDate }}" 
+  bind:close="onSelectWarehousingDateClose" 
+  bind:confirm="onSelectWarehousingDateConfirm"
+/>

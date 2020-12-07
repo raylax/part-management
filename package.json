@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vant/weapp": "^1.6.2",
+    "moment": "^2.29.1"
+  }
+}

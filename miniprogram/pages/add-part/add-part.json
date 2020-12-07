@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "入库",
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-steps": "@vant/weapp/steps/index"
+  }
+}

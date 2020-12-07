@@ -1,0 +1,26 @@
+<!--miniprogram/pages/index.wxml-->
+<van-button icon="plus" type="primary" round="true" bindtap="onAddPart" class="add-part">入库</van-button>
+
+<van-sticky>
+  <van-search placeholder="请输入SN码" bind:change="onSeach"/>
+</van-sticky>
+
+<van-cell 
+  wx:for="{{ list }}"
+  wx:for-item="item" 
+  wx:key="_id" 
+  use-label-slot
+  is-link
+  link-type="navigateTo"
+  url="{{ '/pages/add-part/add-part?id=' + item._id }}"
+  center
+> 
+  <view slot="title">
+      <text class="title-sn">{{ item.sn }}</text>
+      <van-tag wx:if="{{ item.status === 'WAREHOUSE_OUT' }}" plain type="success">已出库</van-tag>
+  </view>
+  <view slot="label">
+    <text>{{ item.warehousingDate }}</text>
+    <text wx:if="{{ item.status === 'WAREHOUSE_OUT' }}"> - {{ item.warehouseOutAt }}</text>
+  </view>
+</van-cell>
