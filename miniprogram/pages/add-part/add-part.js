@@ -97,7 +97,7 @@ Page({
           }
         }).reverse()
       })
-      const title = (result.status === 'WAREHOUSE_OUT' ? '【已出库】' : '【维修中】')
+      const title = (result.status === 'WAREHOUSE_OUT' ? '【已出库】' : '【处理中】')
       wx.setNavigationBarTitle({ title })
       this.setWarehousingDate(new Date(result.warehousingDate))
     } else {
@@ -241,6 +241,10 @@ Page({
     this.setData({
       showWarehouseOutRemark: false,
     })
+    if (!this.data.warehouseOutRemark) {
+      await alert("记录内容不能为空")
+      return
+    }
     if (!await confirm('确认出库?')) {
       return
     }

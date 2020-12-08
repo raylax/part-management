@@ -1,7 +1,7 @@
 <!--miniprogram/pages/index.wxml-->
 <van-button icon="plus" type="primary" round="true" bindtap="onAddPart" class="add-part">入库</van-button>
 
-<van-button icon="scan" type="info" round="true" bindtap="onScan" class="scan-qrcode">扫描</van-button>
+<van-button icon="scan" type="info" round="true" bindtap="onScan" class="scan-qrcode">扫码</van-button>
 
 <van-search placeholder="请输入SN" value="{{ sn }}" bind:change="onSnChange" bind:search="onSnSearch" bind:clear="onSnClear"/>
 

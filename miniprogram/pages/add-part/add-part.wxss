@@ -16,7 +16,7 @@
 
 .test button {
   margin-top: 20rpx;
-  width: 500rpx;
+  width: 600rpx;
 }
 
 .test .van-checkbox {

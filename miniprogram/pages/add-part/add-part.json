@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "入库",
+  "navigationBarTitleText": "加载中",
   "usingComponents": {
     "van-field": "@vant/weapp/field/index",
     "van-calendar": "@vant/weapp/calendar/index",
