@@ -14,7 +14,7 @@
   link-type="navigateTo"
   url="{{ '/pages/add-part/add-part?id=' + item._id }}"
   center
-> 
+>
   <view slot="title">
       <text class="title-sn">{{ item.sn }}</text>
       <van-tag wx:if="{{ item.status === 'WAREHOUSE_OUT' }}" plain type="success">已出库</van-tag>
@@ -24,3 +24,6 @@
     <text wx:if="{{ item.status === 'WAREHOUSE_OUT' }}"> - {{ item.warehouseOutAt }}</text>
   </view>
 </van-cell>
+
+
+<van-empty image="search" wx:if="{{ !hasMore && list.length === 0 }}" description="无数据" />

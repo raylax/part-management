@@ -73,7 +73,7 @@ Page({
     })
 
 
-    if (search && this.data.offset === 0 && result.length == 1) {
+    if (search && this.data.sn && this.data.offset === 0 && result.length == 1) {
       wx.navigateTo({
         url: '/pages/add-part/add-part?id=' + result[0]._id,
       })

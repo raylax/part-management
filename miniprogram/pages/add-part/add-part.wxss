@@ -9,3 +9,26 @@
   font-size: 14px;
   line-height: 16px;
 }
+
+.warehouse_out_remark {
+  padding: 70rpx 30rpx 30rpx 30rpx;
+}
+
+.test button {
+  margin-top: 20rpx;
+  width: 500rpx;
+}
+
+.test .van-checkbox {
+  margin: 6rpx 0 10rpx 30rpx;
+}
+
+.qrcode {
+  padding: 80rpx 60rpx 40rpx 60rpx;
+}
+
+.qrcode_canvas  {
+  width: 200px; 
+  height: 200px;
+  margin-bottom: 30rpx;
+}

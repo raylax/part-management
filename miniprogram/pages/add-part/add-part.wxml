@@ -4,6 +4,7 @@
   <van-cell-group>
     <van-field
       label="SN"
+      required
       value="{{ sn }}"
       placeholder="SN"
       bind:change="onSnChange"
@@ -28,18 +29,19 @@
 
   <van-cell-group>
     <van-field
-    value="{{ remark }}"
-    label="备注"
-    type="textarea"
-    placeholder=""
-    autosize
-    border="{{ false }}"
-    readonly="{{ readonly }}"
-    bind:change="onRemarkChange"
-  />
+      value="{{ remark }}"
+      label="备注"
+      type="textarea"
+      placeholder=""
+      autosize
+      border="{{ false }}"
+      readonly="{{ readonly }}"
+      bind:change="onRemarkChange"
+    />
   </van-cell-group>
 
   <div class="button-group">
+    <van-button wx:if="{{ readonly }}" icon="qr" plain block type="info" bindtap="onQrcode">二维码</van-button>
     <van-button wx:if="{{ readonly }}" icon="records" plain block type="primary" bindtap="onRecord">记录</van-button>
     <van-button wx:if="{{ !readonly }}" icon="completed"  type="primary" block bindtap="onWarehouseIn">入库</van-button>
     <van-button wx:if="{{ readonly && status === 'WAREHOUSE_IN' }}" icon="completed"  plain type="warning" block bindtap="onWarehouseOut">出库</van-button>
@@ -50,13 +52,14 @@
 
 <text wx:if="{{ readonly }}" class="group_title">操作日志</text>
 
-<van-steps
-  wx:if="{{ readonly }}"
-  steps="{{ steps }}"
-  active="{{ steps.length - 1 }}"
-  direction="vertical"
-  bind:click-step="onSetpTap"
-/>
+<van-skeleton wx:if="{{ readonly }}" row="8" loading="{{ loading }}">
+  <van-steps
+    steps="{{ steps }}"
+    active="{{ 0 }}"
+    direction="vertical"
+    bind:click-step="onSetpTap"
+  />
+</van-skeleton>
 
 
 <van-calendar show="{{ showSelectWarehousingDate }}" 
@@ -76,3 +79,102 @@
 />
 
 <van-dialog id="van-dialog" />
+
+
+<van-popup
+  show="{{ showRepairRemark }}"
+  closeable
+  bind:close="onRepairRemarkClose"
+>
+  <view
+    class="warehouse_out_remark"
+  >
+    <textarea
+      value="{{ repairRemark }}"
+      placeholder="在此输入"
+      bindinput="onRepairRemarkChange"
+    />
+    <van-button icon="completed" plain type="info" block bindtap="onRepair">确认</van-button>
+  </view>
+</van-popup>
+
+<van-popup
+  show="{{ showWarehouseOutRemark }}"
+  closeable
+  bind:close="onWarehouseOutRemarkClose"
+>
+  <view
+    class="warehouse_out_remark"
+  >
+    <textarea
+      value="{{ warehouseOutRemark }}"
+      placeholder="在此输入"
+      bindinput="onWarehouseOutRemarkChange"
+    />
+    <van-button icon="completed" plain type="warning" block bindtap="onConfirmWarehoseOut">出库</van-button>
+  </view>
+</van-popup>
+
+<van-popup
+  show="{{ showTest }}"
+  closeable
+  bind:close="onTestClose"
+>
+  <view
+    class="warehouse_out_remark test"
+  >
+    <van-cell-group>
+      <van-checkbox 
+        class="test_ok"
+        value="{{ testPassed }}" 
+        shape="square"
+        icon-size="18px"
+        bind:change="onTestOkChange">测试通过</van-checkbox>
+      <van-field
+        label="序号"
+        model:value="{{ testNo }}"
+        placeholder="序号"
+      />
+      <van-field
+        type="number"
+        label="时间"
+        model:value="{{ testTime }}"
+        placeholder="时间"
+      />
+      <van-field
+        type="number"
+        label="里程"
+        model:value="{{ testMileage }}"
+        placeholder="里程"
+      />
+      <van-field
+        type="number"
+        label="温度"
+        model:value="{{ testTemperature }}"
+        placeholder="温度"
+      />
+      <van-field
+        type="textarea"
+        label="备注"
+        model:value="{{ testRemark }}"
+        placeholder="备注"
+        autosize
+      />
+    </van-cell-group>
+    <van-button icon="completed" plain type="info" block bindtap="onConfirmTest">确认</van-button>
+  </view>
+</van-popup>
+
+<van-popup
+  show="{{ showQrcode }}"
+  closeable
+  bind:close="onQrcodeClose"
+>
+  <view
+    class="qrcode"
+  >
+    <canvas class="qrcode_canvas" style="position:fixed; left:10000px;" canvas-id="qrcode"></canvas>
+    <image class="qrcode_canvas" src="{{ qrcodeUrl }}"/>
+    <van-button icon="qr" plain type="info" block bindtap="onPrintQrcode">打印</van-button>
+  </view>
+</van-popup>

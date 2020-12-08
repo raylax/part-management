@@ -7,6 +7,9 @@
     "van-skeleton": "@vant/weapp/skeleton/index",
     "van-steps": "@vant/weapp/steps/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index"
   }
 }

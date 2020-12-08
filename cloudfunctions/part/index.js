@@ -45,15 +45,16 @@ async function get({ id }, context) {
   return data
 }
 
-async function warehouseOut({ id }, context) {
+async function warehouseOut({ id, remark }, context) {
   return await db.collection('parts').doc(id).update({
     data: {
       status: 'WAREHOUSE_OUT',
       warehouseOutAt: new Date(),
       logs: _.push([
         {
-          title: '入库',
+          title: '出库',
           type: 2,
+          remark,
           createAt: new Date(),
         }
       ]),

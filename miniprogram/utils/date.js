@@ -5,5 +5,5 @@ export const formatDate = (day) => {
 }
 
 export const formatDateTime = (day) => {
-  return moment(typeof day === 'string' ? new Date(day) : day).format('yyyy年MM月DD日 HH时mm分')
+  return moment(typeof day === 'string' ? new Date(day) : day).format('yyyy年MM月DD日 HH时mm分ss秒')
 }

@@ -58,13 +58,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "name": "pages/add-part/add-part",
-          "pathName": "pages/add-part/add-part",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }
