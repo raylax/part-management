@@ -101,6 +101,7 @@ Page({
       wx.setNavigationBarTitle({ title })
       this.setWarehousingDate(new Date(result.warehousingDate))
     } else {
+      wx.setNavigationBarTitle({ title: '入库' })
       this.setWarehousingDate(new Date())
     }
     this.setData({
